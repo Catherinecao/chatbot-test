@@ -1,7 +1,7 @@
 var express = require('express')
 var bodyParser = require('body-parser')
 var request = require('request')
-var app = express
+var app = express()
 
 app.set('port',(process.env.PORT || 5000))
 
@@ -13,14 +13,13 @@ app.get('/', function(req,res){
 	res.send('Hello world. I am a chat bot')
 })
 
-app.get('/webhook', function(req, res) {
-  if (req.query['hub.verify_token'] === 'My_Password') {
-    console.log("Validating webhook")
-    res.send(req.query['hub.challenge'])
-  } else {
-    console.error("Failed validation. Make sure the validation tokens match.")
-  }
-})
+app.get('/webhook', function (req, res) {
+    if (req.query['hub.verify_token'] === 'YOUR_VERIFY_TOKEN') {
+      res.send(req.query['hub.challenge'])
+    } else {
+      res.send('Error, wrong validation token')
+    }
+  })
 
 app.listen(app.get('port'),function(){
   console.log('running on port',app.get('port'))
