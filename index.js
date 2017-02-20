@@ -1,6 +1,6 @@
 var express = require('express')
 var bodyParser = require('body-parser')
-var request = request('request')
+var request = require('request')
 var app = express
 
 app.set('post',(process.env.PORT || 5000))
