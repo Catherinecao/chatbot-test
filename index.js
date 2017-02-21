@@ -16,13 +16,20 @@ app.get('/', function(req,res){
 	res.send('Hello world. I am a chat bot')
 })
 
-app.get('/webhook', function (req, res) {
+app.get('/webhook/', function (req, res) {
     if (req.query['hub.verify_token'] === token) {
       res.send(req.query['hub.challenge'])
     } else {
       res.send('Error, wrong validation token')
     }
   })
+
+app.post('/webhook/', function(req,res){
+  let messaging_events = req.body.entry[0].messaging
+  for (let i=0; i<messaging_events.length; i++){
+    let event = req.body.entry[0].messaging[i]
+  }
+})
 
 app.listen(app.get('port'),function(){
   console.log('running on port',app.get('port'))
